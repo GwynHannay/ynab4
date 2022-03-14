@@ -9,9 +9,11 @@ class account:
         'lastReconciledBalance',
         'accountType',
         'hidden',
+        'isTombstone',
         'sortableIndex',
         'onBudget',
-        'accountName'
+        'accountName',
+        'note'
     ]
 
 
@@ -61,6 +63,28 @@ class payee:
     ]
 
 
+class location:
+    fields = [
+        'entityId',
+        'entityType',
+        'entityVersion',
+        'latitude',
+        'longitude',
+        'parentPayeeId'
+    ]
+
+
+class rename_payee_conditions:
+    fields = [
+        'entityId',
+        'entityType',
+        'entityVersion',
+        'operator',
+        'operand',
+        'parentPayeeId'
+    ]
+
+
 class monthly_budget:
     fields = [
         'entityId',
@@ -100,9 +124,25 @@ class transaction:
         'payeeId',
         'amount',
         'date',
+        'memo',
         'accountId',
         'cleared',
-        'accepted'
+        'accepted',
+        'subTransactions',
+        'transferTransactionId',
+        'flag'
+    ]
+
+
+class subtransaction:
+    fields = [
+        'entityId',
+        'entityType',
+        'entityVersion',
+        'categoryId',
+        'amount',
+        'memo',
+        'parentTransactionId'
     ]
 
 
@@ -126,10 +166,13 @@ class entity_type:
         'masterCategory',
         'category',
         'payee',
+        'location',
+        'payeeStringCondition',
         'monthlyBudget',
         'monthlyCategoryBudget',
         'fileMetaData',
         'transaction',
+        'subTransaction',
         'budgetMetaData',
         'account'
     ]
@@ -148,4 +191,46 @@ class account_type:
         'OtherLiability',
         'Paypal',
         'Savings'
+    ]
+
+
+class overspending_handling:
+    options = [
+        'AffectsBuffer',
+        'Confined'
+    ]
+
+
+class category_type:
+    options = [
+        'INFLOW',
+        'OUTFLOW'
+    ]
+
+
+class rename_operators:
+    options = [
+        'Contains',
+        'EndsWith',
+        'Is',
+        'StartsWith'
+    ]
+
+
+class flags:
+    options = [
+        'Orange',
+        'Red',
+        'Purple',
+        'Yellow',
+        'Green',
+        'Blue'
+    ]
+
+
+class clearance:
+    options = [
+        'Cleared',
+        'Reconciled',
+        'Uncleared'
     ]
