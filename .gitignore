@@ -130,3 +130,6 @@ dmypy.json
 
 # Configs
 config/*
+
+# Dev stuff
+dev_notes/*

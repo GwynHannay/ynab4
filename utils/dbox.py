@@ -7,6 +7,14 @@ config = configparser.ConfigParser()
 config.read('config/keys.ini')
 dropbox_conf = config['DROPBOX']
 
+
+def get_files_list():
+    dbx = dropbox.Dropbox(dropbox_conf['MY_TOKEN'])
+
+    for entry in dbx.files_list_folder('/YNAB').entries:
+        print(entry.name)
+
+
 def connect():
     auth_flow = DropboxOAuth2FlowNoRedirect(dropbox_conf['KEY'], dropbox_conf['SECRET'])
 
@@ -25,6 +33,8 @@ def connect():
     with dropbox.Dropbox(oauth2_access_token=oauth_result.access_token) as dbx:
         dbx.users_get_current_account()
         print("Successfully set up client!")
+    
+    return dbx
 
 if __name__ == "__main__":
     connect()
