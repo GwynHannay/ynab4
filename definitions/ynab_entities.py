@@ -4,15 +4,14 @@ class account:
         'entityId',
         'entityType',
         'entityVersion',
+        'hidden',
+        'accountType',
+        'accountName',
+        'onBudget',
+        'lastReconciledBalance',
         'lastReconciledDate',
         'lastEnteredCheckNumber',
-        'lastReconciledBalance',
-        'accountType',
-        'hidden',
-        'isTombstone',
         'sortableIndex',
-        'onBudget',
-        'accountName',
         'note'
     ]
 
@@ -22,11 +21,12 @@ class master_category:
         'entityId',
         'entityType',
         'entityVersion',
+        'isTombstone',
         'expanded',
         'name',
         'type',
+        'note',
         'deleteable',
-        'isTombstone',
         'subCategories',
         'sortableIndex'
     ]
@@ -37,10 +37,10 @@ class sub_category:
         'entityId',
         'entityType',
         'entityVersion',
+        'isTombstone',
         'name',
         'type',
         'note',
-        'isTombstone',
         'cachedBalance',
         'masterCategoryId',
         'sortableIndex'
@@ -52,6 +52,7 @@ class payee:
         'entityId',
         'entityType',
         'entityVersion',
+        'isTombstone',
         'autoFillCategoryId',
         'autoFillAmount',
         'name',
@@ -79,6 +80,7 @@ class rename_payee_conditions:
         'entityId',
         'entityType',
         'entityVersion',
+        'isTombstone',
         'operator',
         'operand',
         'parentPayeeId'
@@ -91,7 +93,8 @@ class monthly_budget:
         'entityType',
         'entityVersion',
         'monthlySubCategoryBudgets',
-        'month'
+        'month',
+        'note'
     ]
 
 
@@ -100,6 +103,7 @@ class subcategory_budget:
         'entityId',
         'entityType',
         'entityVersion',
+        'isTombstone',
         'categoryId',
         'budgeted',
         'overspendingHandling',
@@ -120,6 +124,7 @@ class transaction:
         'entityId',
         'entityType',
         'entityVersion',
+        'isTombstone',
         'categoryId',
         'payeeId',
         'amount',
@@ -128,9 +133,18 @@ class transaction:
         'accountId',
         'cleared',
         'accepted',
+        'targetAccountId',
         'subTransactions',
         'transferTransactionId',
-        'flag'
+        'flag',
+        'source',
+        'parentTransactionIdIfMatched',
+        'dateEnteredFromSchedule',
+        'checkNumber',
+        'importedPayee',
+        'matchedTransactions',
+        'YNABID',
+        'FITID'
     ]
 
 
@@ -139,9 +153,12 @@ class subtransaction:
         'entityId',
         'entityType',
         'entityVersion',
+        'isTombstone',
         'categoryId',
         'amount',
         'memo',
+        'targetAccountId',
+        'transferTransactionId',
         'parentTransactionId'
     ]
 
@@ -156,6 +173,17 @@ class budget_metadata:
         'currencyLocale',
         'budgetType',
         'dateLocale'
+    ]
+
+
+class items:
+    fields = [
+        'entityId',
+        'entityType',
+        'entityVersion',
+        'isTombstone',
+        'isResolvedConflict',
+        'madeWithKnowledge'
     ]
 
 
