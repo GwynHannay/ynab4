@@ -11,12 +11,13 @@ dropbox_conf = config['DROPBOX']
 def get_files_list():
     dbx = dropbox.Dropbox(dropbox_conf['MY_TOKEN'])
 
-    for entry in dbx.files_list_folder('/YNAB').entries:
-        print(entry.name)
+    # for entry in dbx.files_list_folder('/YNAB').entries:
+    #     print(entry.name)
 
 
 def connect():
-    auth_flow = DropboxOAuth2FlowNoRedirect(dropbox_conf['KEY'], dropbox_conf['SECRET'])
+    auth_flow = DropboxOAuth2FlowNoRedirect(
+        dropbox_conf['KEY'], dropbox_conf['SECRET'])
 
     authorize_url = auth_flow.start()
     print("1. Go to: " + authorize_url)
@@ -35,6 +36,7 @@ def connect():
         print("Successfully set up client!")
     
     return dbx
+
 
 if __name__ == "__main__":
     connect()
