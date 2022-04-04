@@ -133,6 +133,6 @@ dmypy.json
 
 # Development
 config/*
-
-# Dev stuff
 dev_notes/*
+dev_files/*
+.db
