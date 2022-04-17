@@ -1,6 +1,6 @@
 # YNAB4
 Python integrations with YNAB4
 
-## Components
+# Components
 
-### YNAB4 to BigQuery
+## YNAB4 to BigQuery
