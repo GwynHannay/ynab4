@@ -4,7 +4,7 @@ from google.cloud import bigquery
 from google.oauth2 import service_account
 
 credentials = service_account.Credentials.from_service_account_file(
-    '../config/ynab4_gcp_key.json')
+    'config/ynab4_gcp_key.json')
 client = bigquery.Client('pandademic', credentials)
 
 entities = [
@@ -19,7 +19,7 @@ entities = [
 
 
 def open_budget():
-    with open('../dev_files/Budget.yfull') as json_file:
+    with open('dev_files/Budget.yfull') as json_file:
         data = json.load(json_file)
 
         for entity in entities:
@@ -65,6 +65,7 @@ def upload_to_bq():
 
 
 
-if __name__ == "__main__":
-    open_budget()
-    upload_to_bq()
+def clean_up_files():
+    for entity in entities:
+        filename = ''.join((entity, '.json'))
+        os.remove(filename)
