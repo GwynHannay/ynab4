@@ -4,7 +4,7 @@ from google.cloud import bigquery
 from google.oauth2 import service_account
 
 credentials = service_account.Credentials.from_service_account_file(
-    'config/ynab4_gcp_key.json')
+    'secrets/ynab4_gcp_key.json')
 client = bigquery.Client('pandademic', credentials)
 
 entities = [
