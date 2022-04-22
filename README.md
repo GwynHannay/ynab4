@@ -31,6 +31,17 @@ Set up your config file in ``config/bigquery.ini``.
 * _Dataset_: The name of the dataset you've created in BigQuery for these tables.
 * _Location_: The region in which your BigQuery dataset was created.
 
+Once your config file is set up and everything else is in place, simply kick off the import by running ``python main.py`` in your command line.
+
+What will happen:
+* A JSON file for each entity (accountMappings, accounts, masterCategories, monthlyBudgets, payees, scheduledTransactions, and transactions) will be created in the root folder.
+* For each JSON file created, if it is not empty then it will be uploaded into your BigQuery dataset with the schema auto-detected. If those tables already exist, they will be dropped and new ones created. The command line will tell you how many rows were loaded into each successful table.
+* After all entities are uploaded, the JSON files will be deleted.
+
+The main function that kicks off each step in ``main.py`` is super simple, so if you want to skip any of these you can just comment out that line.
+
+![Screen Shot 2022-04-22 at 2 42 17 pm](https://user-images.githubusercontent.com/8345824/164618389-b54f70d7-d657-4807-bf00-f905f00af0b4.png)
+
 ## General Information
 
 **Language:** Python 3.8.13
