@@ -1,11 +1,16 @@
+import configparser
 import json
 import os
 from google.cloud import bigquery
 from google.oauth2 import service_account
 
+config = configparser.ConfigParser()
+config.read('config/bigquery.ini')
+ynab_config = config['YNAB']
+
 credentials = service_account.Credentials.from_service_account_file(
-    'secrets/ynab4_gcp_key.json')
-client = bigquery.Client('pandademic', credentials)
+    ynab_config['ServiceAccountKey'])
+client = bigquery.Client(ynab_config['ProjectID'], credentials)
 
 entities = [
     'accountMappings',
@@ -22,7 +27,7 @@ def open_budget():
     """Opens the YNAB4 budget file and sends each entity to another function to create
         a newline JSON file.
     """
-    with open('Budget.yfull') as json_file:
+    with open(ynab_config['BudgetFile']) as json_file:
         data = json.load(json_file)
 
         for entity in entities:
@@ -45,8 +50,6 @@ def convert_to_newline_json(entity: str, data: list):
 
 def upload_to_bq():
     """Uploads each JSON file for YNAB4 entities into BigQuery. Presets are:
-        Dataset: 'ynab'
-        Location: 'australia-southeast2'
         Write Disposition: WRITE_TRUNCATE
         Schema: Auto-detect
 
@@ -54,7 +57,7 @@ def upload_to_bq():
         Exception: Throw an exception if the JSON file can't be uploaded and tell us
             which entity threw the error.
     """
-    dataset_ref = client.dataset('ynab')
+    dataset_ref = client.dataset(ynab_config['Dataset'])
     job_config = bigquery.LoadJobConfig()
 
     for entity in entities:
@@ -72,7 +75,7 @@ def upload_to_bq():
                 job = client.load_table_from_file(
                     source_file,
                     table_ref,
-                    location="australia-southeast2",
+                    location=ynab_config['Location'],
                     job_config=job_config
                 )
         except Exception as e:
@@ -82,7 +85,7 @@ def upload_to_bq():
         job.result()
 
         print("Loaded {} rows into {}:{}".format(
-            job.output_rows, 'ynab', entity))
+            job.output_rows, ynab_config['Dataset'], entity))
 
 
 def clean_up_files():
