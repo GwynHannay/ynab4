@@ -132,7 +132,7 @@ dmypy.json
 .DS_Store
 
 # Development
-config/*
+secrets/*
 dev_notes/*
 dev_files/*
 .db

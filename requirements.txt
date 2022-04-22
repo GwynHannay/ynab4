@@ -1,2 +1,1 @@
-dropbox>=11.27.0
 google-cloud-bigquery>=3.0.1
