@@ -42,8 +42,15 @@ The main function that kicks off each step in ``main.py`` is super simple, so if
 
 ![Screen Shot 2022-04-22 at 2 42 17 pm](https://user-images.githubusercontent.com/8345824/164618389-b54f70d7-d657-4807-bf00-f905f00af0b4.png)
 
+## Release History
+
+* 1.0.0
+    * Original project launch.
+
 ## General Information
 
 **Language:** Python 3.8.13
+
+**Integrations:** Google Cloud Platform - BigQuery
 
 Distributed under the GNU GPL v3 license. See ``LICENSE`` for more information.
