@@ -136,3 +136,4 @@ secrets/*
 dev_notes/*
 dev_files/*
 *.db
+config/bigquery.ini
