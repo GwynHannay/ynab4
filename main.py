@@ -1,4 +1,5 @@
 import utils.ynab_to_bq as bq
+import utils.ynab_to_db as db
 
 
 def main():
@@ -12,5 +13,9 @@ def main():
     bq.clean_up_files()
 
 
+def sqlite_db():
+    db.create_connection()
+
+
 if __name__ == "__main__":
-    main()
+    sqlite_db()
