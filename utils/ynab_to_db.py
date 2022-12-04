@@ -1,4 +1,5 @@
 import sqlite3
+import utils.config_reader as cf
 
 
 def create_connection(db_file='ynab.db'):
